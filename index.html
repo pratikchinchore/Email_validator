@@ -1,0 +1,107 @@
+
+<html>
+
+<head>
+    <title>Email Validator</title>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="login-root">
+        <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+            <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="formbg-outer">
+                            <div class="formbg">
+                                <div
+                                    class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+                                    <h1><a href=" ">Email Validator</a></h1>
+                                </div>
+                                <form id="stripe-login">
+                                    <label>Upload a file</label>
+                                    <div class="field padding-bottom--24">
+                                        <center><input type="file" id="file_upload" /></center>
+                                    </div>
+                                    <div class="field padding-bottom--24">
+                                        <button type="button" class="btn btn-info" id="upload_excel"
+                                            onclick="upload()">Upload
+                                            File</button>
+                                        <button type="button" class="btn btn-info" onclick="remove_unwanted()"
+                                            id="remove_unwantedd">Valid/Invalid Email</button>
+                                        <img src="https://technosmarter.com/qa/assets/images/loading.gif"
+                                            id="loader" style="display:none;"><br>
+                                    </div>
+
+                                    <button type="button" class="btn btn-info" id="clickme1">Download Excel
+                                        File</button><br><br>
+                                </form>
+                                <table id="display_excel_data2" border="2" style="margin-top: 20px; display: none;">
+                                </table>
+                                <strong>
+                                    <p id="display_first_msg3" class="text-danger"
+                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE;">
+                                    </p>
+                                </strong>
+                                <strong>
+                                    <p id="display_first_msg" class="text-danger"
+                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE">
+                                    </p>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="formbg-outer">
+                            <div class="formbg">
+                                <div
+                                    class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+                                    <h1><a href=" ">Duplicate Email</a></h1>
+                                </div>
+                                <form id="stripe-login">
+                                    <label>Upload a file</label>
+                                    <div class="field padding-bottom--24">
+                                        <center><input type="file" id="file_upload1" /></center>
+                                    </div>
+                                    <div class="field padding-bottom--24">
+                                        <button type="button" class="btn btn-info" onclick="upload1()">Upload
+                                            File</button>
+
+                                        <button type="button" class="btn btn-info" onclick="remove_duplicate()"
+                                            id="remove_duplicated">Duplicate Email</button>
+                                        <img src="https://technosmarter.com/qa/assets/images/loading.gif"
+                                            id="loader2" style="display:none;"><br>
+                                    </div>
+                                    <button type="button" class="btn btn-info" id="clickme2">Download Excel
+                                        File</button><br><br>
+                                </form>
+                                <table id="display_excel_data3" border="2" style="margin-top: 20px; display: none;">
+                                </table>
+                                <strong>
+                                    <p id="duplicate_msg_1" class="text-danger"
+                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE;">
+                                    </p>
+                                </strong>
+                                <strong>
+                                    <p id="duplicate_msg_2" class="text-danger"
+                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE">
+                                    </p>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
