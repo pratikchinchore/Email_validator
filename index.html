@@ -1,107 +1,129 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Email Validator</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Email Validation Suite</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div class="login-root">
-        <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
-            <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="formbg-outer">
-                            <div class="formbg">
-                                <div
-                                    class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-                                    <h1><a href=" ">Email Validator</a></h1>
+    <header>
+        <div class="container text-center">
+            <h2 style="font-weight: 800;">Email Validation Suite</h2>
+            <p>Email Checker & Duplicate Analyzer</p>
+        </div>
+    </header>
+    <main class="py-5">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <!-- Email Validator -->
+                <div class="col-md-6">
+                    <div class="card email-validator shadow-sm border-0 h-100">
+                        <div class="card-body p-4">
+                            <!-- <h5 class="fw-semibold text-primary mb-4 border-bottom pb-2">Email Validator</h5> -->
+                            <h3 class="fw-semibold mb-4 border-bottom pb-2 text-primary">Email Validator</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label fw-medium">Upload File</label>
+                                    <input type="file" id="file_upload" class="form-control" />
                                 </div>
-                                <form id="stripe-login">
-                                    <label>Upload a file</label>
-                                    <div class="field padding-bottom--24">
-                                        <center><input type="file" id="file_upload" /></center>
-                                    </div>
-                                    <div class="field padding-bottom--24">
-                                        <button type="button" class="btn btn-info" id="upload_excel"
-                                            onclick="upload()">Upload
-                                            File</button>
-                                        <button type="button" class="btn btn-info" onclick="remove_unwanted()"
-                                            id="remove_unwantedd">Valid/Invalid Email</button>
-                                        <img src="https://technosmarter.com/qa/assets/images/loading.gif"
-                                            id="loader" style="display:none;"><br>
-                                    </div>
 
-                                    <button type="button" class="btn btn-info" id="clickme1">Download Excel
-                                        File</button><br><br>
-                                </form>
-                                <table id="display_excel_data2" border="2" style="margin-top: 20px; display: none;">
-                                </table>
-                                <strong>
-                                    <p id="display_first_msg3" class="text-danger"
-                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE;">
-                                    </p>
-                                </strong>
-                                <strong>
-                                    <p id="display_first_msg" class="text-danger"
-                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE">
-                                    </p>
-                                </strong>
-                            </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-primary" id="upload_excel"
+                                        onclick="upload()">Upload</button>
+                                    <button type="button" class="btn btn-success" id="remove_unwantedd"
+                                        onclick="remove_unwanted()">Validate</button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        id="clickme1">Download</button>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <img src="https://technosmarter.com/qa/assets/images/loading.gif" id="loader"
+                                        style="display:none;" width="40" />
+                                </div>
+                                <div class="progress mt-3 d-none" id="progressBarContainer">
+                                    <div id="progressBar"
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar" style="width: 0%; height: 8px;"></div>
+                                </div>
+
+                                <div class="alert alert-danger alert-dismissible fade show mt-3 d-none" id="errorBox">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <span id="errorMsg"></span>
+                                </div>
+
+                            </form>
+
+                            <table id="display_excel_data2" class="table table-striped table-sm mt-4"
+                                style="display:none;"></table>
+
+                            <div id="display_first_msg3" class="alert alert-info mt-3 d-none"></div>
+                            <div id="display_first_msg" class="alert alert-warning mt-3 d-none"></div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="formbg-outer">
-                            <div class="formbg">
-                                <div
-                                    class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-                                    <h1><a href=" ">Duplicate Email</a></h1>
-                                </div>
-                                <form id="stripe-login">
-                                    <label>Upload a file</label>
-                                    <div class="field padding-bottom--24">
-                                        <center><input type="file" id="file_upload1" /></center>
-                                    </div>
-                                    <div class="field padding-bottom--24">
-                                        <button type="button" class="btn btn-info" onclick="upload1()">Upload
-                                            File</button>
+                </div>
 
-                                        <button type="button" class="btn btn-info" onclick="remove_duplicate()"
-                                            id="remove_duplicated">Duplicate Email</button>
-                                        <img src="https://technosmarter.com/qa/assets/images/loading.gif"
-                                            id="loader2" style="display:none;"><br>
-                                    </div>
-                                    <button type="button" class="btn btn-info" id="clickme2">Download Excel
-                                        File</button><br><br>
-                                </form>
-                                <table id="display_excel_data3" border="2" style="margin-top: 20px; display: none;">
-                                </table>
-                                <strong>
-                                    <p id="duplicate_msg_1" class="text-danger"
-                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE;">
-                                    </p>
-                                </strong>
-                                <strong>
-                                    <p id="duplicate_msg_2" class="text-danger"
-                                        style=" text-align: center; margin-top: 10px; font-size: larger; border: 1px solid #fff; background-color: #B9F1FE">
-                                    </p>
-                                </strong>
-                            </div>
+                <!-- Duplicate Finder -->
+                <div class="col-md-6">
+                    <div class="card duplicate-finder shadow-sm border-0 h-100">
+
+
+                        <div class="card-body p-4">
+                            <!-- <h5 class="fw-semibold text-danger mb-4 border-bottom pb-2">Duplicate Email Finder</h5> -->
+                            <h3 class="fw-semibold mb-4 border-bottom pb-2 text-success">Duplicate Email Finder</h3>
+
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label fw-medium">Upload File</label>
+                                    <input type="file" id="file_upload1" class="form-control" />
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="btn btn-primary" onclick="upload1()">Upload</button>
+                                    <button type="button" class="btn btn-danger" id="remove_duplicated"
+                                        onclick="remove_duplicate()">Find Duplicates</button>
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        id="clickme2">Download</button>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <img src="https://technosmarter.com/qa/assets/images/loading.gif" id="loader2"
+                                        style="display:none;" width="40" />
+                                </div>
+                                <div class="progress mt-3 d-none" id="progressBarContainer">
+                                    <div id="progressBar"
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar" style="width: 0%; height: 8px;"></div>
+                                </div>
+
+                                <div class="alert alert-danger alert-dismissible fade show mt-3 d-none" id="errorBox">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    <span id="errorMsg"></span>
+                                </div>
+
+                            </form>
+
+                            <table id="display_excel_data3" class="table table-striped table-sm mt-4"
+                                style="display:none;"></table>
+
+                            <div id="duplicate_msg_1" class="alert alert-info mt-3 d-none"></div>
+                            <div id="duplicate_msg_2" class="alert alert-warning mt-3 d-none"></div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
+    </main>
+
+
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 
 </html>
